@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/DemViewer" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>

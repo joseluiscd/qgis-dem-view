@@ -26,6 +26,7 @@ import os
 from PyQt4 import QtGui, uic
 from PyQt4.QtCore import pyqtSignal
 from qgis.core import *
+import dem_render
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'dem_viewer_dockwidget_base.ui'))
@@ -48,6 +49,7 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         self.setupUi(self)
 
         self.updateLayers()
+        self.viewButton.pressed.connect(self.viewModel)
 
 
     def updateLayers(self):
@@ -68,3 +70,12 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
+
+    def viewModel(self, *args, **kwargs):
+        print(args)
+        print(kwargs)
+
+        a = dem_render.DemViewerWindow()
+        self.currentWindow = a
+
+        a.show()

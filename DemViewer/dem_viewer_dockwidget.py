@@ -25,6 +25,7 @@ import os
 
 from PyQt4 import QtGui, uic
 from PyQt4.QtCore import pyqtSignal
+from qgis.core import *
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'dem_viewer_dockwidget_base.ui'))
@@ -33,6 +34,8 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     closingPlugin = pyqtSignal()
+
+
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -44,7 +47,24 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
 
+        self.updateLayers()
+
+
+    def updateLayers(self):
+        reg = QgsMapLayerRegistry.instance()
+        for i in range(self.heightLayerBox.count()):
+            self.heightLayerBox.removeItem(i)
+
+        for i in range(self.colorLayerBox.count()):
+            self.colorLayerBox.removeItem(i)
+
+        for name, layer in reg.mapLayers().items():
+            if isinstance(layer, QgsRasterLayer):
+                self.heightLayerBox.addItem(name, layer)
+                self.colorLayerBox.addItem(name, layer)
+
+
+
     def closeEvent(self, event):
         self.closingPlugin.emit()
         event.accept()
-

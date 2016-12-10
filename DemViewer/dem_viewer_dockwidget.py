@@ -26,7 +26,7 @@ import os
 from PyQt4 import QtGui, uic
 from PyQt4.QtCore import pyqtSignal
 from qgis.core import *
-import dem_render
+import dem_render, dem_drawable
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'dem_viewer_dockwidget_base.ui'))
@@ -75,7 +75,14 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         print(args)
         print(kwargs)
 
-        a = dem_render.DemViewerWindow()
+        heightRaster = self.heightLayerBox.itemData(self.heightLayerBox.currentIndex()).dataProvider()
+        colorRaster = self.colorLayerBox.itemData(self.colorLayerBox.currentIndex()).dataProvider()
+
+        dem = dem_drawable.DemDrawable(heightRaster, colorRaster, self.precisionBox.value())
+
+        a = dem_render.DemViewerWindow(dem)
+
         self.currentWindow = a
 
-        a.show()
+
+        a.showMaximized()

@@ -31,7 +31,6 @@ class DemDrawable:
         quad = 0
         for x in range(w-1):
             for y in range(h-1):
-                print("Punto:",(x,y))
                 z1 = self.getValue(x/w, y/h)
                 z2 = self.getValue((x+1)/w, y/h)
                 z3 = self.getValue(x/w, (y+1)/h)
@@ -70,9 +69,6 @@ class DemDrawable:
         self.normals = normals[indices]
 
 
-
-
-
     def getValue(self, x, y):
         """
         x and y between 0 and 1
@@ -81,10 +77,8 @@ class DemDrawable:
         realX = self.extent.xMinimum() + (x*(self.extent.xMaximum()-self.extent.xMinimum()))
         realY = self.extent.yMinimum() + (y*(self.extent.yMaximum()-self.extent.yMinimum()))
 
-        print((realX, realY))
         val = self.heightData.identify(QgsPoint(realX, realY), QgsRaster.IdentifyFormatValue)
         if val.isValid():
-            print(val.results())
             return val.results()[1]
 
     def draw(self):

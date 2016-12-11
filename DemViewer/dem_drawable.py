@@ -36,10 +36,10 @@ class DemDrawable:
                 z3 = self.getValue(x/w, (y+1)/h)
                 z4 = self.getValue((x+1)/w, (y+1)/h)
 
-                v1 = (x/w, z1, y/h)
-                v2 = ((x+1)/w, z2, y/h)
-                v3 = (x/w, z3, (y+1)/h)
-                v4 = ((x+1)/w, z4, (y+1)/h)
+                v1 = (1-x/w, z1, y/h)
+                v2 = (1-(x+1)/w, z2, y/h)
+                v3 = (1-x/w, z3, (y+1)/h)
+                v4 = (1-(x+1)/w, z4, (y+1)/h)
 
                 vertices.append(v1)
                 vertices.append(v2)
@@ -67,7 +67,6 @@ class DemDrawable:
 
         self.vertices = vertices[indices]
         self.normals = normals[indices]
-
 
     def getValue(self, x, y):
         """

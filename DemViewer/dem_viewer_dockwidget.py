@@ -72,9 +72,6 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         event.accept()
 
     def viewModel(self, *args, **kwargs):
-        print(args)
-        print(kwargs)
-
         heightRaster = self.heightLayerBox.itemData(self.heightLayerBox.currentIndex()).dataProvider()
         colorRaster = self.colorLayerBox.itemData(self.colorLayerBox.currentIndex()).dataProvider()
 

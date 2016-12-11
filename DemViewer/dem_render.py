@@ -22,7 +22,7 @@ class DemRenderer(QtOpenGL.QGLWidget):
         GL.glEnable(GL.GL_AUTO_NORMAL)
         GL.glEnable(GL.GL_NORMALIZE)
         GL.glEnable(GL.GL_LIGHTING)
-        GL.glEnable(GL.GL_CULL_FACE)
+        #GL.glEnable(GL.GL_CULL_FACE)
 
         GL.glEnable(GL.GL_LIGHT0)
         GL.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, (0.2, 0.2, 0.2, 1))
@@ -54,7 +54,7 @@ class DemRenderer(QtOpenGL.QGLWidget):
         GL.glRotate(self.yRot, 0, 1, 0)
         GL.glRotate(self.zRot, 0, 0, 1)
         GL.glTranslate(-0.5, 0, -0.5)
-        GL.glScale(1, 0.001, 1)
+        GL.glScale(1, 0.0001, 1)
         self.dem.draw()
 
     def mousePressEvent(self, event):

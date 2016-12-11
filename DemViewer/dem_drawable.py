@@ -55,7 +55,6 @@ class DemDrawable:
         vertices = numpy.array(vertices)
         indices = numpy.array(indices)
         normals = numpy.zeros(vertices.shape, dtype=vertices.dtype)
-        print(indices)
         tris = vertices[indices]
 
         n = numpy.cross(tris[::,1]-tris[::,0], tris[::,2]-tris[::,0])
@@ -65,9 +64,12 @@ class DemDrawable:
         normals[indices[:,0]] += n
         normals[indices[:,1]] += n
         normals[indices[:,2]] += n
+        normals = normalize(normals)
 
         self.vertices = vertices[indices]
-        self.normals = normalize(normals[indices])
+        self.normals = normals[indices]
+
+
 
 
 
@@ -88,7 +90,7 @@ class DemDrawable:
     def draw(self):
         GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT, (0.1,0.1,0.1,1))
         GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_DIFFUSE, (1,1,1,1))
-        GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_SPECULAR, (0.6,0.6,0.6,1))
+        GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_SPECULAR, (1,1,1,1))
         GL.glMaterialf(GL.GL_FRONT_AND_BACK, GL.GL_SHININESS, 20)
         GL.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_EMISSION, (0,0,0,0));
 

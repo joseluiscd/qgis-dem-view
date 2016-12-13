@@ -15,6 +15,9 @@
   </property>
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QFormLayout" name="formLayout">
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+    </property>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
@@ -26,23 +29,13 @@
      <widget class="QComboBox" name="heightLayerBox"/>
     </item>
     <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>Color Layer</string>
+       <string>Divisions</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QComboBox" name="colorLayerBox"/>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="viewButton">
-      <property name="text">
-       <string>View</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
      <widget class="QSpinBox" name="precisionBox">
       <property name="minimum">
        <number>1</number>
@@ -55,10 +48,17 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_3">
+    <item row="2" column="1">
+     <widget class="QPushButton" name="viewButton">
       <property name="text">
-       <string>Divisions</string>
+       <string>View</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="updateLayersBtn">
+      <property name="text">
+       <string>Update layers</string>
       </property>
      </widget>
     </item>

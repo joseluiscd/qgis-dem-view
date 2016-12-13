@@ -50,6 +50,7 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
         self.updateLayers()
         self.viewButton.pressed.connect(self.viewModel)
+        self.updateLayersBtn.pressed.connect(self.updateLayers)
 
 
     def updateLayers(self):
@@ -57,14 +58,9 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
         for i in range(self.heightLayerBox.count()):
             self.heightLayerBox.removeItem(i)
 
-        for i in range(self.colorLayerBox.count()):
-            self.colorLayerBox.removeItem(i)
-
         for name, layer in reg.mapLayers().items():
             if isinstance(layer, QgsRasterLayer):
                 self.heightLayerBox.addItem(name, layer)
-                self.colorLayerBox.addItem(name, layer)
-
 
 
     def closeEvent(self, event):
@@ -73,9 +69,8 @@ class DemViewerDockWidget(QtGui.QDockWidget, FORM_CLASS):
 
     def viewModel(self, *args, **kwargs):
         heightRaster = self.heightLayerBox.itemData(self.heightLayerBox.currentIndex()).dataProvider()
-        colorRaster = self.colorLayerBox.itemData(self.colorLayerBox.currentIndex()).dataProvider()
 
-        dem = dem_drawable.DemDrawable(heightRaster, colorRaster, self.precisionBox.value())
+        dem = dem_drawable.DemDrawable(heightRaster, self.precisionBox.value())
 
         a = dem_render.DemViewerWindow(dem)
 

@@ -14,7 +14,7 @@ def normalize(n):
     return n
 
 class DemDrawable:
-    def __init__(self, heightData, colorData, divisions):
+    def __init__(self, heightData, divisions):
         self.divisions = divisions
 
         self.heightData = heightData
